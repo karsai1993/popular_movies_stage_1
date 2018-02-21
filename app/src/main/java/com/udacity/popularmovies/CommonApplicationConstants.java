@@ -1,9 +1,8 @@
 package com.udacity.popularmovies;
 
 /**
- * Created by Laci on 18/02/2018.
+ * Class for constants used in the application commonly
  */
-
 public class CommonApplicationConstants {
     public static final String BACKDROP_PATH_KEY = "backdrop_path";
     public static final String POSTER_PATH_KEY = "poster_path";

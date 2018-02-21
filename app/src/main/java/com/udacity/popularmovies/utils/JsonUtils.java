@@ -11,9 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Laci on 17/02/2018.
+ * Class for implementing json ToDos
  */
-
 public class JsonUtils {
 
     private static final String RESULTS_KEY = "results";

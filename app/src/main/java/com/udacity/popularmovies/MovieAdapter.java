@@ -13,14 +13,13 @@ import com.udacity.popularmovies.utils.ImageUtils;
 import java.util.List;
 
 /**
- * Created by Laci on 17/02/2018.
+ * Class for implementing adapter for movie list
  */
-
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
-    private Context mContext;
-    private List<Movie> mMovieList;
-    private ListItemClickListener mOnClickListener;
+    private final Context mContext;
+    private final List<Movie> mMovieList;
+    private final ListItemClickListener mOnClickListener;
 
     public MovieAdapter(Context context, List<Movie> moviesList) {
         this.mContext = context;
@@ -33,10 +32,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         Context context = parent.getContext();
         int movieListItemId = R.layout.movie_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
-        boolean isNeededToAttachToParentImmediately = false;
-        View view = inflater.inflate(movieListItemId, parent, isNeededToAttachToParentImmediately);
-        MovieViewHolder movieViewHolder = new MovieViewHolder(view);
-        return movieViewHolder;
+        View view = inflater.inflate(movieListItemId, parent, false);
+        return new MovieViewHolder(view);
     }
 
     @Override
@@ -50,8 +47,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         return mMovieList.size();
     }
 
+    /**
+     * Class for implementing view holder of adapter
+     */
     class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        ImageView movieImageView;
+        final ImageView movieImageView;
 
         public MovieViewHolder(View itemView) {
             super(itemView);

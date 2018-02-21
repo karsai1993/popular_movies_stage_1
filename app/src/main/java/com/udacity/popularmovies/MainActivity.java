@@ -24,17 +24,20 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 
-/**
- * butterknife is a third party library which is used here to binding the ids to fields easier
- * reference: http://jakewharton.github.io/butterknife/
- */
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
+/**
+ * Class for implementing starter point of the application
+ */
 public class MainActivity extends AppCompatActivity implements SharedPreferences
         .OnSharedPreferenceChangeListener, MovieAdapter.ListItemClickListener {
 
+    /**
+     * butterknife is a third party library which is used here to binding the ids to fields easier
+     * reference: http://jakewharton.github.io/butterknife/
+     */
     @BindView(R.id.rv_movies)
     RecyclerView movieRecyclerView;
     @BindView(R.id.tv_movie_request_fetch_error)
@@ -44,18 +47,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @BindView(R.id.pb_movie_request_loading)
     ProgressBar loadingProgressBar;
 
-    private MovieAdapter mMovieAdapter;
     private List<Movie> mMovieList;
     private Unbinder mUnbinder;
-
-    private final int COLUMN_NUMBER = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mUnbinder = ButterKnife.bind(this);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, COLUMN_NUMBER);
+        int columnNumber = 3;
+        GridLayoutManager layoutManager = new GridLayoutManager(this, columnNumber);
         movieRecyclerView.setLayoutManager(layoutManager);
         movieRecyclerView.setHasFixedSize(true);
         applySortingOrderBasedOnSharedPreferences();
@@ -126,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     /**
      * Function to make the poster of each movie visible
      */
-    public void showMovieData() {
+    private void showMovieData() {
         fetchErrorTextView.setVisibility(View.INVISIBLE);
         networkErrorTextView.setVisibility(View.INVISIBLE);
         movieRecyclerView.setVisibility(View.VISIBLE);
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     /**
      * Function to make the error message referring to problem with http request visible
      */
-    public void showFetchError() {
+    private void showFetchError() {
         movieRecyclerView.setVisibility(View.INVISIBLE);
         networkErrorTextView.setVisibility(View.INVISIBLE);
         fetchErrorTextView.setVisibility(View.VISIBLE);
@@ -144,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     /**
      * Function to make the error message referring to problem with internet connection visible
      */
-    public void showNetworkError() {
+    private void showNetworkError() {
         movieRecyclerView.setVisibility(View.INVISIBLE);
         fetchErrorTextView.setVisibility(View.INVISIBLE);
         networkErrorTextView.setVisibility(View.VISIBLE);
@@ -172,6 +173,9 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         startActivity(detailActivityIntent);
     }
 
+    /**
+     * Class for implementing background process for http request
+     */
     public class MovieDataGeneratorTask extends AsyncTask<String, Void, List<Movie>> {
 
         @Override
@@ -188,8 +192,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             URL movieRequestUrl = NetworkUtils.buildUrlForSorting(args[0]);
             try {
                 String movieResponseAsJson = NetworkUtils.getResponseFromUrl(movieRequestUrl);
-                List<Movie> movieList = JsonUtils.generateMovieDataListFromJson(movieResponseAsJson);
-                return movieList;
+                return JsonUtils.generateMovieDataListFromJson(movieResponseAsJson);
             } catch (IOException e) {
                 e.printStackTrace();
                 return null;
@@ -206,8 +209,8 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
             if (movieList != null) {
                 showMovieData();
                 mMovieList = movieList;
-                mMovieAdapter = new MovieAdapter(MainActivity.this, mMovieList);
-                movieRecyclerView.setAdapter(mMovieAdapter);
+                MovieAdapter movieAdapter = new MovieAdapter(MainActivity.this, mMovieList);
+                movieRecyclerView.setAdapter(movieAdapter);
             } else {
                 showFetchError();
             }

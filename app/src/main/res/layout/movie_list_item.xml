@@ -7,6 +7,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/iv_movie_list_item" />
+        android:id="@+id/iv_movie_list_item"
+        android:contentDescription="@string/poster_image_content_description" />
 
 </FrameLayout>

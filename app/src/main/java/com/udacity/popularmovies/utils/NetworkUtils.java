@@ -16,9 +16,8 @@ import java.util.Scanner;
 import javax.net.ssl.HttpsURLConnection;
 
 /**
- * Created by Laci on 17/02/2018.
+ * Class for implementing network ToDos
  */
-
 public class NetworkUtils {
 
     private static final String MOVIE_LIST_REQUEST_BASE_URL = "https://api.themoviedb.org/3/movie/";
@@ -74,7 +73,8 @@ public class NetworkUtils {
     public static boolean isNetworkAvailable(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        NetworkInfo activeNetworkInfo =
+                connectivityManager != null ? connectivityManager.getActiveNetworkInfo() : null;
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

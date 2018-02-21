@@ -22,4 +22,7 @@
     <string name="detail_activity_average_vote_label">Rating:</string>
     <string name="detail_activity_release_date_label">Release date:</string>
     <string name="detail_activity_overview_label">Description:</string>
+
+    <string name="poster_image_content_description">Poster Image</string>
+    <string name="backdrop_image_content_description">Backdrop Image</string>
 </resources>

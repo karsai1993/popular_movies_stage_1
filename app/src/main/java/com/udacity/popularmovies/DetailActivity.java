@@ -10,10 +10,6 @@ import android.widget.TextView;
 
 import com.udacity.popularmovies.utils.ImageUtils;
 
-/**
- * butterknife is a third party library which is used here to binding the ids to fields easier
- * reference: http://jakewharton.github.io/butterknife/
- */
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,9 +20,8 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * Created by Laci on 18/02/2018.
+ * Class for implementing detail view of each movie
  */
-
 public class DetailActivity extends AppCompatActivity {
 
     private Unbinder mUnbinder;
@@ -40,6 +35,10 @@ public class DetailActivity extends AppCompatActivity {
 
     private final String DATA_NOT_AVAILABLE = "DNA";
 
+    /**
+     * butterknife is a third party library which is used here to binding the ids to fields easier
+     * reference: http://jakewharton.github.io/butterknife/
+     */
     @BindView(R.id.iv_detail_activity_backdrop)
     ImageView backdropImageView;
     @BindView(R.id.iv_detail_activity_poster)
@@ -127,7 +126,7 @@ public class DetailActivity extends AppCompatActivity {
     private void releaseDateHandler() {
         SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat outputFormat =
-                new SimpleDateFormat("EEE, d MMM yyyy", Locale.ENGLISH);
+                new SimpleDateFormat("EEE, d MMM yyyy", Locale.US);
         try {
             Date releaseDate = inputFormat.parse(mReleaseDate);
             String formattedDate = outputFormat.format(releaseDate);

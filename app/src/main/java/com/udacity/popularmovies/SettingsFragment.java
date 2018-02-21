@@ -8,9 +8,8 @@ import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceScreen;
 
 /**
- * Created by Laci on 18/02/2018.
+ * Class for implementing Settings option
  */
-
 public class SettingsFragment extends PreferenceFragmentCompat implements
         SharedPreferences.OnSharedPreferenceChangeListener{
 

@@ -1,7 +1,7 @@
 package com.udacity.popularmovies.model;
 
 /**
- * Created by Laci on 17/02/2018.
+ * Class for storing data for each movie
  */
 public class Movie {
     private String mTitle;
